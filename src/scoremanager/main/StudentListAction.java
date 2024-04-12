@@ -17,14 +17,15 @@ import tool.Action;
 
 public class StudentListAction extends Action{
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		HttpSession session = request.getSession();
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
 		String entYearStr="";
 		String classNum="";
 		String isAttendStr="";
 		int entYear = 0;
+		boolean isAttend = false;
 		List<Student> students = null;
 		LocalDate todaysDate = LocalDate.now();
 		int year = todaysDate.getYear();
@@ -34,7 +35,7 @@ public class StudentListAction extends Action{
 
 		entYearStr = req.getParameter("f1");
 		classNum = req.getParameter("f2");
-		isAttendStr = req.getParameter("f1");
+		isAttendStr = req.getParameter("f3");
 
 		List<String> list = cNumDao.filter(teacher.getSchool());
 

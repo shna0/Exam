@@ -30,7 +30,7 @@ public class Student implements Serializable {
 	public String getClassNum() {
 		return classNum;
 	}
-	public void ClassNum(String classNum) {
+	public void setClassNum(String classNum) {
 		this.classNum = classNum;
 	}
 	public boolean isAttend() {

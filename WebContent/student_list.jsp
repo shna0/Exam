@@ -10,7 +10,7 @@
 	<c:param name="scripts"></c:param>
 
 	<c:param name="content">
-		<section class="mo-4">
+		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生管理</h2>
 			<div class="my-2 text-end px-4">
 				<a href="StudentCreate.action">新規登録</a>
@@ -23,7 +23,7 @@
 							<option value="0">--------</option>
 							<c:forEach var="year" items="${ent_year_set}">
 								<%-- 現在のyearと選択されていたf1が一致していた場合selectedを追記 --%>
-								<option value="${year}" <c:if test="${num==f2}">selected</c:if>>${year}</option>
+								<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 							</c:forEach>
 						</select>
 					</div>

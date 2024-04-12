@@ -10,13 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("/FrontController")
+@WebServlet(urlPatterns = {"*.action"})
 public class FrontController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		res.getWriter().append("Served at: ").append(req.getContextPath());
+		try{
+			String path = req.getServletPath().substring(1);
+			String name = path.replace(".a", "A").replace('/', '.');
+
+			System.out.println("★ servlet path -> " + req.getServletPath());
+			System.out.println("★ class name -> " + name);
+
+			Action action = (Action) Class.forName(name).getDeclaredConstructor().newInstance();
+
+			action.execute(req, res);
+		}catch(Exception e){
+			e.printStackTrace();
+			req.getRequestDispatcher("/error.jsp").forward(req, res);
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request,response);
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		doGet(req,res);
 	}
 }
