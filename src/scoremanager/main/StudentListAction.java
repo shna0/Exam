@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 
@@ -20,7 +21,17 @@ public class StudentListAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
+		/*
+		School school = new School();
+		school.setCd("tes");
+		school.setName("テスト校");
 
+		Teacher teacher = new Teacher();
+		teacher.setId("admin1");
+		teacher.setName("管理者1");
+		teacher.setPassword("password");
+		teacher.setSchool(school);
+		*/
 		String entYearStr="";
 		String classNum="";
 		String isAttendStr="";
