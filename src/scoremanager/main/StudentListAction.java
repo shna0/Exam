@@ -8,8 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import bean.School;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
@@ -19,9 +19,10 @@ import tool.Action;
 public class StudentListAction extends Action{
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		/*
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
-		/*
+		*/
 		School school = new School();
 		school.setCd("tes");
 		school.setName("テスト校");
@@ -31,7 +32,7 @@ public class StudentListAction extends Action{
 		teacher.setName("管理者1");
 		teacher.setPassword("password");
 		teacher.setSchool(school);
-		*/
+
 		String entYearStr="";
 		String classNum="";
 		String isAttendStr="";
@@ -44,9 +45,14 @@ public class StudentListAction extends Action{
 		ClassNumDao cNumDao = new ClassNumDao();
 		Map<String, String> errors = new HashMap<>();
 
-		entYearStr = req.getParameter("f1");
-		classNum = req.getParameter("f2");
-		isAttendStr = req.getParameter("f3");
+//		entYearStr = req.getParameter("f1");
+//		classNum = req.getParameter("f2");
+//		isAttendStr = req.getParameter("f3");
+
+		entYearStr = "2023";
+		classNum = "101";
+		isAttendStr = "checked";
+
 
 		List<String> list = cNumDao.filter(teacher.getSchool());
 
@@ -79,5 +85,8 @@ public class StudentListAction extends Action{
 		req.setAttribute("students",students);
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
+
+		System.out.println("★ ★ ★ ★ ★ ★ ★ ★ ");
+		req.getRequestDispatcher("student_list.jsp").forward(req, res);
 	}
 }

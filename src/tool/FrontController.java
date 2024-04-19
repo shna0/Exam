@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		res.getWriter().append("Served at: ").append(req.getContextPath());
 		try{
 			String path = req.getServletPath().substring(1);
 			String name = path.replace(".a", "A").replace('/', '.');
